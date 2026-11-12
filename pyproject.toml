@@ -1,6 +1,6 @@
 [project]
 name = "sentence-transformers"
-version = "6.3.0"
+version = "6.3.0+lineaje.1"
 description = "Embeddings, Retrieval, and Reranking"
 license = "Apache-2.0"
 readme = "README.md"
@@ -9,7 +9,8 @@ authors = [
     { name = "Tom Aarsen", email = "tom.aarsen@huggingface.co" },
 ]
 maintainers = [
-    { name = "Tom Aarsen", email = "tom.aarsen@huggingface.co" }
+    { name = "Tom Aarsen", email = "tom.aarsen@huggingface.co" },
+    { name = "Lineaje DepFixer", email = "221268890+Lineaje-DepFixer@users.noreply.github.com" },
 ]
 requires-python = ">=3.10"
 keywords = [
@@ -44,20 +45,39 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://www.SBERT.net"
-Repository = "https://github.com/huggingface/sentence-transformers/"
-
+Homepage = "https://github.com/lineaje-labs-gos/huggingface-sentence-transformers"
+Repository = "https://github.com/lineaje-labs-gos/huggingface-sentence-transformers"
+Tracker = "https://github.com/lineaje-labs-gos/huggingface-sentence-transformers/issues"
 
 [project.optional-dependencies]
-image = ["transformers[vision]"]
-audio = ["transformers[audio]"]
-video = ["transformers[video]"]
-train = ["datasets>=2.16.0", "accelerate>=1.3.0"]
-merge = ["mergekit>=0.1.5"]
-kernels = ["transformers[kernels]>=5.20.0"]
-onnx = ["optimum-onnx[onnxruntime]"]
-onnx-gpu = ["optimum-onnx[onnxruntime-gpu]"]
-openvino = ["optimum-intel[openvino]>=2.0.0"]
+image = [
+    "transformers[vision]",
+]
+audio = [
+    "transformers[audio]",
+]
+video = [
+    "transformers[video]",
+]
+train = [
+    "datasets>=2.16.0",
+    "accelerate>=1.3.0",
+]
+merge = [
+    "mergekit>=0.1.5",
+]
+kernels = [
+    "transformers[kernels]>=5.20.0",
+]
+onnx = [
+    "optimum-onnx[onnxruntime]",
+]
+onnx-gpu = [
+    "optimum-onnx[onnxruntime-gpu]",
+]
+openvino = [
+    "optimum-intel[openvino]>=2.0.0",
+]
 dev = [
     "datasets>=2.16.0",
     "accelerate>=1.3.0",
@@ -93,8 +113,8 @@ lint = [
     "pre-commit",
 ]
 dev = [
-    {include-group = "test"},
-    {include-group = "lint"},
+    { include-group = "test" },
+    { include-group = "lint" },
 ]
 docs = [
     "sphinx==8.1.3",
@@ -109,18 +129,27 @@ docs = [
 ]
 
 [build-system]
-requires = ["setuptools>=77.0.3"]
+requires = [
+    "setuptools>=77.0.3",
+]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["sentence_transformers*"]
+include = [
+    "sentence_transformers*",
+]
 namespaces = false
 
 [tool.setuptools.package-data]
-sentence_transformers = ["**/model_card_template.md", "py.typed"]
+sentence_transformers = [
+    "**/model_card_template.md",
+    "py.typed",
+]
 
 [tool.uv]
-default-groups = ["dev"]
+default-groups = [
+    "dev",
+]
 
 [tool.ruff]
 line-length = 119
@@ -133,51 +162,47 @@ select = [
     "W",
     "I",
     "UP",
-    "D417",  # undocumented-param
+    "D417",
 ]
-# Skip `E731` (do not assign a lambda expression, use a def)
 ignore = [
-    # LineTooLong
     "E501",
-    # DoNotAssignLambda
-    "E731"
+    "E731",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "examples/**" = [
-    # Ignore `E402` (import violations) in all examples
-    "E402", 
-    # Ignore missing required imports
-    "I002"
-    ]
+    "E402",
+    "I002",
+]
 "docs/**" = [
-    # Ignore missing required imports
-    "I002"
-    ]
+    "I002",
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-ignore-var-parameters = true  # Don't require documenting *args / **kwargs
+ignore-var-parameters = true
 
 [tool.ruff.lint.isort]
-known-third-party = ["datasets"]
-required-imports = ["from __future__ import annotations"]
+known-third-party = [
+    "datasets",
+]
+required-imports = [
+    "from __future__ import annotations",
+]
 
 [tool.ty.rules]
-unresolved-attribute = "ignore" # Not nicely compatible with 'torch' its custom __setattr__
+unresolved-attribute = "ignore"
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tests"
+    "tests",
 ]
 addopts = "--strict-markers -m 'not slow and not custom'"
 markers = [
     "slow: marks tests as slow",
-    "custom: marks tests for third-party models with custom modules"
+    "custom: marks tests for third-party models with custom modules",
 ]
 env = [
-    # Avoid any ReadTimeout when making requests to the Hub (default is 10)
-    # Note: 'D:' means default value from laptop or CI won't be overwritten
     "D:HF_HUB_DOWNLOAD_TIMEOUT=60",
 ]
 
@@ -193,7 +218,6 @@ ein = "ein"
 ist = "ist"
 arange = "arange"
 writeable = "writeable"
-
 
 [tool.typos.files]
 extend-exclude = [
@@ -214,7 +238,6 @@ paria = "paria"
 ende = "ende"
 
 [tool.typos.type.py.extend-identifiers]
-# for backwards compatibility, as these were previously misspelled
 compute_metrices = "compute_metrices"
 eucledian_distance = "eucledian_distance"
 compute_metrices_batched = "compute_metrices_batched"
